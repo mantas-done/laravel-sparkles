@@ -46,6 +46,11 @@ if (!function_exists('validate')) {
 }
 
 if (!function_exists('delete')) {
+    /**
+     * Deletes one model or every model in collection
+     *
+     * @param $model_or_collection
+     */
     function delete($model_or_collection) {
         if (is_subclass_of($model_or_collection, \Illuminate\Database\Eloquent\Model::class)) {
             if ($model_or_collection) {
@@ -56,10 +61,17 @@ if (!function_exists('delete')) {
                 $model->delete();
             }
         }
+
+        throw new \Exception("Unknown type of object");
     }
 }
 
 if (!function_exists('forceDelete')) {
+    /**
+     * Force deletes one model or every model in collection
+     *
+     * @param $model_or_collection
+     */
     function forceDelete($model_or_collection) {
         if (is_subclass_of($model_or_collection, \Illuminate\Database\Eloquent\Model::class)) {
             if ($model_or_collection) {
@@ -74,6 +86,13 @@ if (!function_exists('forceDelete')) {
 }
 
 if (!function_exists('bustCache')) {
+    /**
+     * Busts browser cache of files
+     *
+     * @param $public_file_path
+     *
+     * @return string
+     */
     function bustCache($public_file_path) {
         $public_file_path = '/' . ltrim($public_file_path, '/');
         $php_public_path = public_path();
@@ -86,6 +105,14 @@ if (!function_exists('bustCache')) {
 }
 
 if (!function_exists('twoDigits')) {
+    /**
+     * Returns number with 2 digits after comma. Used to display currency
+     *
+     * @param      $number
+     * @param null $prefix
+     *
+     * @return string
+     */
     function twoDigits($number, $prefix = null) {
         $digits = 2;
         if ($number < 0) {
@@ -97,6 +124,11 @@ if (!function_exists('twoDigits')) {
 }
 
 if (!function_exists('deleteAllDirectoryFilesExceptGitignore')) {
+    /**
+     * Deletes all files in directory except .gitignore
+     *
+     * @param $directory
+     */
     function deleteAllDirectoryFilesExceptGitignore($directory) {
         $leave_files = array('.gitignore');
 
@@ -109,24 +141,52 @@ if (!function_exists('deleteAllDirectoryFilesExceptGitignore')) {
 }
 
 if (!function_exists('cookieSet')) {
+    /**
+     * Set cookie
+     *
+     * @param $name
+     * @param $value
+     * @param $minutes
+     */
     function cookieSet($name, $value, $minutes) {
         \Illuminate\Support\Facades\Cookie::queue(\Illuminate\Support\Facades\Cookie::make($name, $value, $minutes));
     }
 }
 
 if (!function_exists('cookieGet')) {
+    /**
+     * Get cookie
+     *
+     * @param $name
+     * @param $default
+     *
+     * @return string
+     */
     function cookieGet($name, $default) {
         return \Illuminate\Support\Facades\Cookie::get($name, $default);
     }
 }
 
 if (!function_exists('cookieForget')) {
+    /**
+     * Forget cookie
+     *
+     * @param $name
+     */
     function cookieForget($name) {
         \Illuminate\Support\Facades\Cookie::queue(\Illuminate\Support\Facades\Cookie::forget($name));
     }
 }
 
 if (!function_exists('paginate')) {
+    /**
+     * Paginates collection or array
+     *
+     * @param     $collection_or_array
+     * @param int $per_page
+     *
+     * @return \Illuminate\Pagination\LengthAwarePaginator
+     */
     function paginate($collection_or_array, $per_page = 100) {
         if (is_array($collection_or_array)) {
             $collection = collect($collection_or_array);
@@ -140,6 +200,11 @@ if (!function_exists('paginate')) {
 }
 
 if (!function_exists('faker')) {
+    /**
+     * Return instance of faker
+     *
+     * @return \Faker\Generator|null
+     */
     function faker() {
         static $faker = null;
         if (!$faker) {

@@ -44,6 +44,14 @@ if ($user->profilePicture) {
 #### forceDelete()
 
 The same as delete(), but force deletes records (for soft deletes).
+```php
+forceDelete($user->comments);
+
+// equals to this
+foreach ($user->comments as $comment) {
+    $comment->forceDelete();
+}
+```
 
 #### bustCache()
 
@@ -61,6 +69,30 @@ twoDigits(1.2);      // 1.20
 twoDigits(1.234);    // 1.23
 twoDigits(1, '$');   // $1.00
 twoDigits(-1, '$');  // -$1.00
+```
+
+#### Cookies
+Simplifies working with Laravel cookies. You can call those functions from anywhere in your code unlike Laravel cookie implementation.
+```php
+cookieSet('name', 'value', 60);
+cookieGet('name');
+cookieForget('name');
+```
+
+#### paginate()
+Paginates collection or array and returns default Laravel paginator.
+```php
+$users_array = [[
+    'email' => 'abc@abc.com',
+    'name' => 'Abc',
+], [
+    'email' => 'bcd@bcd.com',
+    'name' => 'Bcd',
+]];
+
+$users = paginate($users_array);
+
+return view('users.index', compact('users');
 ```
 
 #### validate()
@@ -100,7 +132,7 @@ class Comment
         validate([
             'email' => 'required|email',
             'comment' => 'required|string|between:1,256',
-        ], compact('email', 'comment');
+        ], compact('email', 'comment'));
         
         // save comment
     }
@@ -116,30 +148,6 @@ When migrating and seeding database in development, it is beneficial to delete a
 deleteAllDirectoryFilesExceptGitignore('/storage/app/uploads');
 ```
 
-#### Cookies
-Simplifies working with Laravel cookies. You can call those functions from anywhere in your code unlike Laravel cookie implementation.
-```php
-cookieSet('name', 'value');
-cookieGet('name');
-cookieForget('name');
-```
-
-#### paginate()
-Paginates collection or array and returns default Laravel paginator.
-```php
-$users_array = [[
-    'email' => 'abc@abc.com',
-    'name' => 'Abc',
-], [
-    'email' => 'bcd@bcd.com',
-    'name' => 'Bcd',
-]];
-
-$users = paginate($users_array);
-
-return view('users.index', compact('users');
-```
-
 #### faker()
 Get instance of a faker
 ````php
@@ -149,5 +157,5 @@ echo faker()->email;
 ## Contributing
 
 I decided to share my helpers when I saw that similar concepts got implemented in Laravel, like **artisan fresh** and **now()**.  
-I believe that other developers have their own gems hidden in their code. If you would like to share one of them, please create a pull request.
+I believe that other developers have their own gems hidden in their code. If you would like to share one of them, please create a pull request to **master** branch.
 
