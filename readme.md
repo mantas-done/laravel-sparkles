@@ -11,12 +11,12 @@ composer require mantas-done/laravel-sparkles 1.*
 ## Usage
 
 Get currently logged in user (the same as Auth::user())
-```
+```php
 user();
 ```
 
 Current user IP address
-```
+```php
 ip();
 ```
 

@@ -14,12 +14,5 @@
         "files": [
             "src/Helpers/helpers.php"
         ]
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "MantasDone\\LaravelSparkles\\SparklesServiceProvider"
-            ]
-        }
     }
 }
