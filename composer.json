@@ -1,0 +1,25 @@
+{
+    "name": "mantas-done/laravel-sparkles",
+    "description": "Helpers for Laravel",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Mantas",
+            "email": "mantas783@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {},
+    "autoload": {
+        "files": [
+            "src/Helpers/helpers.php"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "MantasDone\\LaravelSparkles\\SparklesServiceProvider"
+            ]
+        }
+    }
+}
