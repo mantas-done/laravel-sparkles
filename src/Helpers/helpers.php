@@ -190,6 +190,8 @@ if (!function_exists('paginate')) {
     function paginate($collection_or_array, $per_page = 100) {
         if (is_array($collection_or_array)) {
             $collection = collect($collection_or_array);
+        } else {
+            $collection = $collection_or_array;
         }
         $current_page = \Illuminate\Pagination\LengthAwarePaginator::resolveCurrentPage();
         $paginated_collection = new \Illuminate\Pagination\LengthAwarePaginator($collection->slice(($current_page - 1) * $per_page, $per_page), $collection->count(), $per_page);
